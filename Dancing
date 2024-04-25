@@ -1,0 +1,139 @@
+TASK 1 
+What does the 3-letter acronym SMB stand for? 
+sol. SERVER MESSAGE BLOCK
+
+TASK 2
+What port does SMB use to operate at?
+sol. 445
+
+TASK 3
+What is the serviece name for port 445 that came up in our Nmap sccan?
+sol.
+commands
+                                                                                                         
+┌──(root㉿kali)-[~]
+└─# nmap -T4 -p445 -sV -sU -O -v -Pn 10.129.44.173
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times may be slower.
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-04-25 09:50 EDT
+NSE: Loaded 46 scripts for scanning.
+Initiating Parallel DNS resolution of 1 host. at 09:50
+Completed Parallel DNS resolution of 1 host. at 09:50, 0.01s elapsed
+Initiating UDP Scan at 09:50
+Scanning 10.129.44.173 [1 port]
+Completed UDP Scan at 09:50, 1.14s elapsed (1 total ports)
+Initiating Service scan at 09:50
+Scanning 1 service on 10.129.44.173
+Completed Service scan at 09:51, 58.64s elapsed (1 service on 1 host)
+Initiating OS detection (try #1) against 10.129.44.173
+Retrying OS detection (try #2) against 10.129.44.173
+WARNING: OS didn't match until try #2
+NSE: Script scanning 10.129.44.173.
+Initiating NSE at 09:51
+Completed NSE at 09:51, 0.00s elapsed
+Initiating NSE at 09:51
+Completed NSE at 09:51, 0.33s elapsed
+Nmap scan report for 10.129.44.173
+Host is up (0.46s latency).
+
+PORT    STATE         SERVICE      VERSION
+
+
+##############445/udp open|filtered microsoft-ds################
+
+
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose
+Running: Microsoft Windows 2008|7
+OS CPE: cpe:/o:microsoft:windows_server_2008:r2 cpe:/o:microsoft:windows_7
+OS details: Microsoft Windows Server 2008 R2, Microsoft Windows 7
+Network Distance: 2 hops
+
+Read data files from: /usr/bin/../share/nmap
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 68.14 seconds
+           Raw packets sent: 44 (5.420KB) | Rcvd: 33 (3.428KB)
+
+
+TASK 4
+What is the 'flag' or 'switch' that we can use with the smbclient utility to 'list' the available shares on Dancing?
+sol. -L
+
+commands
+┌──(root㉿kali)-[~]
+└─# smbclient -L 10.129.44.173    
+Password for [WORKGROUP\root]:
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        ADMIN$          Disk      Remote Admin
+        C$              Disk      Default share
+        IPC$            IPC       Remote IPC
+        WorkShares      Disk      
+tstream_smbXcli_np_destructor: cli_close failed on pipe srvsvc. Error was NT_STATUS_IO_TIMEOUT
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.129.44.173 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+
+
+TASK 5
+How many shares are there on ddancing?
+sol. 4
+
+TASK 6
+What is the share we are able to access in the end with a blank password
+sol.
+command
+┌──(root㉿kali)-[~]
+└─# smbclient -p445 \\\\10.129.44.173\\WorkShares
+Password for [WORKGROUP\root]:
+Try "help" to get a list of possible commands.
+smb: \> help
+?              allinfo        altname        archive        backup         
+blocksize      cancel         case_sensitive cd             chmod          
+chown          close          del            deltree        dir            
+du             echo           exit           get            getfacl        
+geteas         hardlink       help           history        iosize         
+lcd            link           lock           lowercase      ls             
+l              mask           md             mget           mkdir          
+more           mput           newer          notify         open           
+posix          posix_encrypt  posix_open     posix_mkdir    posix_rmdir    
+posix_unlink   posix_whoami   print          prompt         put            
+pwd            q              queue          quit           readlink       
+rd             recurse        reget          rename         reput          
+rm             rmdir          showacls       setea          setmode        
+scopy          stat           symlink        tar            tarmode        
+timeout        translate      unlock         volume         vuid           
+wdel           logon          listconnect    showconnect    tcon           
+tdis           tid            utimes         logoff         ..             
+!              
+
+
+TASK 7
+What is the command we can use within the SMB shellto download the files we find?
+sol. get
+command
+smb: \> cd James.P
+smb: \James.P\> ls
+  .                                   D        0  Thu Jun  3 04:38:03 2021
+  ..                                  D        0  Thu Jun  3 04:38:03 2021
+  flag.txt                            A       32  Mon Mar 29 05:26:57 2021
+
+                5114111 blocks of size 4096. 1753256 blocks available
+smb: \James.P\> get flag.txt
+getting file \James.P\flag.txt of size 32 as flag.txt (0.0 KiloBytes/sec) (average 0.0 KiloBytes/sec)
+
+TASK 8
+Submit the flag
+sol. 5f61c10dffbc77a704d76016a22f1664  
+
+command 
+smb: \James.P\> exit
+                                                                                                                    
+┌──(root㉿kali)-[~]
+└─# ls
+breachparse  infoset1    ipsweep.sh  pyscript1.py      scanner.py                                worknotes.txt
+flag.txt     iplist.txt  ip.txt      pyscript.py.save  tensorflow-1.4-billion-password-analysis
+                                                                                                                    
+┌──(root㉿kali)-[~]
+└─# cat flag.txt  
+5f61c10dffbc77a704d76016a22f1664  
