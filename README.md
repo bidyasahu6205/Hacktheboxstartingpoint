@@ -10,3 +10,4 @@ STARTINGPOINT
 1. meow
 2. fawn
 3. dancing
+4. redeemer
