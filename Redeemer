@@ -312,7 +312,10 @@ sol. select
 10.129.193.218:6379> SELECT 0
 OK
 
-TASK
+TASK 9
+How many keys are present inside the database with index 0?
+sol. 4
+
 10.129.193.218:6379> dbsize
 (integer) 4
 10.129.193.218:6379> help dbsize
@@ -322,7 +325,9 @@ TASK
   since: 1.0.0
   group: server
 
-10.129.193.218:6379> help to obtain all keys
+TASK 10
+Which command is used to obtain all the keys in a database?
+sol. keys *
 
 10.129.193.218:6379> keys *
 1) "temp"
@@ -331,28 +336,13 @@ TASK
 4) "stor"
 (1.44s)
 10.129.193.218:6379> 
-03e1d2b376c37ab3f5319922053953eb
 
-                                                                                                                    
-┌──(root㉿kali)-[/home/bidya_sahu_diva]
-└─# redis-cli -p 6379 -h 10.129.193.218
-10.129.193.218:6379> slect
-(error) ERR unknown command `slect`, with args beginning with: 
-10.129.193.218:6379> SELECT index
-(error) ERR invalid DB index
-10.129.193.218:6379> database
-(error) ERR unknown command `database`, with args beginning with: 
-10.129.193.218:6379> SELECT index 0
-(error) ERR wrong number of arguments for 'select' command
+TASK 11
+Submit root flag
+
+
 10.129.193.218:6379> SELECT 0
 OK
-10.129.193.218:6379> ls
-(error) ERR unknown command `ls`, with args beginning with: 
-10.129.193.218:6379> list
-(error) ERR unknown command `list`, with args beginning with: 
-(1.26s)
-10.129.193.218:6379> help list
-
 10.129.193.218:6379> dbsize
 (integer) 4
 10.129.193.218:6379> help dbsize
@@ -361,8 +351,6 @@ OK
   summary: Return the number of keys in the selected database
   since: 1.0.0
   group: server
-
-10.129.193.218:6379> help to obtain all keys
 
 10.129.193.218:6379> keys *
 1) "temp"
