@@ -7,7 +7,12 @@ Pre-required
 3. Kali linux
   
 STARTINGPOINT
+
+##########     TIER 0     ##########
 1. meow
 2. fawn
 3. dancing
 4. redeemer
+
+##########     TIER 1     ##########
+1. Appointment
