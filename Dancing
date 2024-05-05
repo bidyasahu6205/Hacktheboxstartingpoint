@@ -107,7 +107,6 @@ wdel           logon          listconnect    showconnect    tcon
 tdis           tid            utimes         logoff         ..             
 !              
 
-
 TASK 7
 What is the command we can use within the SMB shellto download the files we find?
 sol. get
@@ -133,7 +132,6 @@ smb: \James.P\> exit
 └─# ls
 breachparse  infoset1    ipsweep.sh  pyscript1.py      scanner.py                                worknotes.txt
 flag.txt     iplist.txt  ip.txt      pyscript.py.save  tensorflow-1.4-billion-password-analysis
-                                                                                                                    
 ┌──(root㉿kali)-[~]
 └─# cat flag.txt  
 5f61c10dffbc77a704d76016a22f1664  
