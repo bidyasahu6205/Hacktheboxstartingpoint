@@ -1,0 +1,120 @@
+TASK 1
+What does the acronym SQL stand for? 
+sol. Structured Query Language 
+
+TASK 2
+What is one of the most common type of SQL vulnerabilities? 
+sol. SQL injection 
+
+TASK 3
+What is the 2021 OWASP Top 10 classification for this vulnerability? 
+sol. A03:2021-Injection 
+
+TASK 4
+What does Nmap report as the service and version that are running on port 80 of the target? 
+sol. Apache httpd 2.4.38 ((Debian)) 
+
+                                                                                                                    
+┌──(root㉿kali)-[/home/kali]
+└─# nmap -T4 -F -A  10.129.28.98 
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-14 11:19 EDT
+Nmap scan report for 10.129.28.98
+Host is up (0.79s latency).
+Not shown: 99 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.38 ((Debian))
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.94SVN%E=4%D=5/14%OT=80%CT=7%CU=30381%PV=Y%DS=2%DC=I%G=Y%TM=6643
+OS:815F%P=x86_64-pc-linux-gnu)SEQ(SP=106%GCD=1%ISR=109%TI=Z%CI=Z%TS=9)SEQ(S
+OS:P=106%GCD=1%ISR=109%TI=Z%CI=Z%TS=A)SEQ(SP=107%GCD=1%ISR=109%TI=Z%CI=Z%TS
+OS:=B)OPS(O1=M542ST11NW7%O2=M542ST11NW7%O3=M542NNT11NW7%O4=M542ST11NW7%O5=M
+OS:542ST11NW7%O6=M542ST11)WIN(W1=FE88%W2=FE88%W3=FE88%W4=FE88%W5=FE88%W6=FE
+OS:88)ECN(R=Y%DF=Y%T=40%W=FAF0%O=M542NNSNW7%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=
+OS:S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q
+OS:=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A
+OS:%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y
+OS:%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T
+OS:=40%CD=S)
+
+Network Distance: 2 hops
+
+TRACEROUTE (using port 21/tcp)
+HOP RTT       ADDRESS
+1   390.95 ms 10.10.16.1
+2   ... 30
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 104.22 seconds
+
+TASK 5
+What is the standard port used for the HTTPS protocol? 
+sol. 443
+
+TASK 6
+What is a folder called in web-application terminology? 
+sol. directory 
+
+TASK 7
+What is the HTTP response code is given for 'Not Found' errors? 
+sol. 404
+
+TASK 8
+Gobuster is one tool used to brute force directories on a webserver. What switch do we use with Gobuster to specify we're looking to discover directories, and not subdomains? 
+sol. dir
+
+                                                                                                                   
+┌──(root㉿kali)-[/home/kali]
+└─# gobuster -h                        
+Usage:
+  gobuster [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  dir         Uses directory/file enumeration mode
+  dns         Uses DNS subdomain enumeration mode
+  fuzz        Uses fuzzing mode. Replaces the keyword FUZZ in the URL, Headers and the request body
+  gcs         Uses gcs bucket enumeration mode
+  help        Help about any command
+  s3          Uses aws bucket enumeration mode
+  tftp        Uses TFTP enumeration mode
+  version     shows the current version
+  vhost       Uses VHOST enumeration mode (you most probably want to use the IP address as the URL parameter)
+
+Flags:
+      --debug                 Enable debug output
+      --delay duration        Time each thread waits between requests (e.g. 1500ms)
+  -h, --help                  help for gobuster
+      --no-color              Disable color output
+      --no-error              Don't display errors
+  -z, --no-progress           Don't display progress
+  -o, --output string         Output file to write results to (defaults to stdout)
+  -p, --pattern string        File containing replacement patterns
+  -q, --quiet                 Don't print the banner and other noise
+  -t, --threads int           Number of concurrent threads (default 10)
+  -v, --verbose               Verbose output (errors)
+  -w, --wordlist string       Path to the wordlist. Set to - to use STDIN.
+      --wordlist-offset int   Resume from a given position in the wordlist (defaults to 0)
+
+Use "gobuster [command] --help" for more information about a command.
+
+TASK 9
+What single character can be used to comment out the rest of a line in MySQL? 
+sol. #
+
+TASK 10
+If user input is not handled carefully, it could be interpreted as a comment. Use a comment to login as admin without knowing the password. What is the first word on the webpage returned? 
+sol. Congratulations
+
+here we go to crome and search for http://10.129.28.98/
+we will get a login page
+and username: admin'#
+    password:   
+ you will get 
+
+          Congratulations!
+          Your flag is: e3d0796d002a446c0e622226f42e9672
+
+TASK 11
+Submit root flag 
+sol. e3d0796d002a446c0e622226f42e9672 
