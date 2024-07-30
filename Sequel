@@ -1,3 +1,57 @@
+
 TASK 1
 During our scan, which port do we find serving MySQL?
-sol.
+sol.3306
+
+┌──(root㉿kali)-[/home/kali]
+└─# nmap -p- -A -T4 10.129.134.172
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-07-29 19:49 EDT
+Nmap scan report for 10.129.134.172
+Host is up (0.56s latency).
+Not shown: 65534 closed tcp ports (reset)
+PORT     STATE SERVICE VERSION
+3306/tcp open  mysql?
+| mysql-info: 
+|   Protocol: 10
+|   Version: 5.5.5-10.3.27-MariaDB-0+deb10u1
+|   Thread ID: 66
+|   Capabilities flags: 63486
+|   Some Capabilities: IgnoreSigpipes, SupportsLoadDataLocal, Speaks41ProtocolOld, FoundRows, InteractiveClient, ODBCClient, LongColumnFlag, Support41Auth, ConnectWithDatabase, Speaks41ProtocolNew, SupportsTransactions, IgnoreSpaceBeforeParenthesis, SupportsCompression, DontAllowDatabaseTableColumn, SupportsMultipleResults, SupportsAuthPlugins, SupportsMultipleStatments
+|   Status: Autocommit
+|   Salt: GSMf<9F5rd~l%o"Vm@88
+|_  Auth Plugin Name: mysql_native_password
+Aggressive OS guesses: Linux 4.15 - 5.8 (95%), Linux 5.3 - 5.4 (95%), Linux 2.6.32 (95%), Linux 5.0 - 5.5 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A or 211 Network Camera (Linux 2.6.17) (94%), ASUS RT-N56U WAP (Linux 3.4) (93%), Linux 3.16 (93%), Linux 5.0 (93%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+
+TRACEROUTE (using port 5900/tcp)
+HOP RTT       ADDRESS
+1   731.11 ms 10.10.16.1
+2   731.32 ms 10.129.134.172
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 4656.86 seconds
+
+TASK 2
+What community-developed MySQL version is the target running? 
+sol. MariaDB
+
+TASK 3
+When using the MySQL command line client, what switch do we need to use in order to specify a login username? 
+sol. -u
+
+TASK 4
+Which username allows us to log into this MariaDB instance without providing a password? 
+sol. root
+
+TASK 5 
+In SQL, what symbol can we use to specify within the query that we want to display everything inside a table? 
+sol. *
+
+TASK 6
+In SQL, what symbol do we need to end each query with? 
+sol. ;
+
+TASK 7
+There are three databases in this MySQL instance that are common across all MySQL instances. What is the name of the fourth that's unique to this host? 
+sol. 
