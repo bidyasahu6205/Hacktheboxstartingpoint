@@ -1,0 +1,75 @@
+TASK 1
+What Nmap scanning switch employs the use of default scripts during a scan? 
+sol. -sC
+
+TASK 2
+ What service version is found to be running on port 21? 
+sol. vsftpd 3.0.3
+
+┌──(kali㉿kali)-[~]
+└─$ sudo nmap -Pn -p1-100 -T4 -A 10.129.1.15
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-10-19 06:03 EDT
+Nmap scan report for 10.129.1.15
+Host is up (0.62s latency).
+Not shown: 98 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| -rw-r--r--    1 ftp      ftp            33 Jun 08  2021 allowed.userlist
+|_-rw-r--r--    1 ftp      ftp            62 Apr 20  2021 allowed.userlist.passwd
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to ::ffff:10.10.16.50
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 4
+|      vsFTPd 3.0.3 - secure, fast, stable
+|_End of status
+80/tcp open  http    Apache httpd 2.4.41 ((Ubuntu))
+|_http-title: Smash - Bootstrap Business Template
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+Aggressive OS guesses: Linux 4.15 - 5.8 (96%), Linux 5.3 - 5.4 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A or 211 Network Camera (Linux 2.6.17) (95%), Linux 2.6.32 (94%), Linux 5.0 - 5.5 (94%), ASUS RT-N56U WAP (Linux 3.4) (93%), Linux 3.16 (93%), Linux 5.0 - 5.4 (93%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: OS: Unix
+
+TRACEROUTE (using port 12/tcp)
+HOP RTT       ADDRESS
+1   683.98 ms 10.10.16.1
+2   329.75 ms 10.129.1.15
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 81.43 seconds
+
+TASK 3
+What FTP code is returned to us for the "Anonymous FTP login allowed" message? 
+sol.
+
+TASK 4
+After connecting to the FTP server using the ftp client, what username do we provide when prompted to log in anonymously? 
+sol. 
+
+TASK 6
+What is one of the higher-privilege sounding usernames in 'allowed.userlist' that we download from the FTP server?
+sol.
+
+TASK 7
+What version of Apache HTTP Server is running on the target host? 
+sol. 
+
+TASK 8
+What switch can we use with Gobuster to specify we are looking for specific filetypes?
+sol.
+
+TASK 9
+Which PHP file can we identify with directory brute force that will provide the opportunity to authenticate to the web service? 
+sol.
+
+TASK 10
+Submit the flag
+sol. 
