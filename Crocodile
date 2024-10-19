@@ -178,4 +178,7 @@ Finished
                                                                  
 TASK 10
 Submit the flag
-sol. 
+sol. c7110277ac44d78b6a9fff2232434d16
+- Open crome and search url: http://10.129.112.205/login.php.
+- Then login using the credentials we found.
+- and then we got to the index page and the flag was there in website.
